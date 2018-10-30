@@ -15908,11 +15908,6 @@ var jsPanel = {
         console$1.appendChild(prompt);
         input.focus();
     }
-    function clear() {
-        console$1.innerHTML = '';
-        console$1.appendChild(prompt);
-        input.focus();
-    }
 
     var element = document.createElement('div');
     var originals = {
@@ -15970,31 +15965,59 @@ var jsPanel = {
         console.error(val);
     };
 
+    var Gui = /** @class */ (function () {
+        function Gui(title) {
+            this.title = title;
+            if (document.readyState === "complete") {
+                this._createJsPanel();
+            }
+            else {
+                var self = this;
+                document.addEventListener("onload", function (e) {
+                    self._createJsPanel();
+                });
+            }
+        }
+        Gui.prototype._createJsPanel = function () {
+            var container = this._createGui();
+            var title = this.title || "GUI";
+            var panel = jsPanel.create({
+                theme: "primary",
+                headerTitle: title,
+                container: window.document.body,
+                callback: function () {
+                    this.content.appendChild(container);
+                }
+            });
+        };
+        Gui.prototype._createGui = function () {
+            var container = document.createElement("div");
+            container.classList.add('uk-scope');
+            container.classList.add("stupid-console-gui");
+            return container;
+        };
+        Gui.prototype.add = function (target, property, min, max, step) {
+        };
+        return Gui;
+    }());
+
     var content;
     window.onload = function () {
         var panel = jsPanel.create({
             theme: "primary",
-            headerTitle: "<div class=\"uk-scope\">\n " +
-                "<ul class=\"uk-iconnav\">\n" +
-                "    <li><a id='stupid-console-clear-btn' href=\"#\" uk-icon=\"icon: trash\"></a></li>\n" +
-                "</ul>" +
-                "</div>",
+            headerTitle: "console",
             container: window.document.body,
             callback: function () {
                 content = this.content;
                 content.appendChild(container);
             }
         });
-        var btn = document.getElementById('stupid-console-clear-btn');
-        btn.addEventListener("click", function (e) {
-            e.preventDefault();
-            clear();
-        });
     };
     var index = {
         log: originals.log,
         info: originals.info,
         error: originals.error,
+        Gui: Gui
     };
 
     return index;
