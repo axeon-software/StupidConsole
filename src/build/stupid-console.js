@@ -175,35 +175,133 @@ var StupidConsole = (function () {
     var Gui = /** @class */ (function () {
         function Gui(title) {
             this.title = title;
-            if (document.readyState === "complete") {
-                this._createJsPanel();
-            }
-            else {
-                var self = this;
-                document.addEventListener("onload", function (e) {
-                    self._createJsPanel();
-                });
-            }
+            this._createGui();
+            this._createJsPanel();
         }
         Gui.prototype._createJsPanel = function () {
-            var container = this._createGui();
+            var container = this.container;
             var title = this.title || "GUI";
-            var panel = jsPanel.create({
+            jsPanel.create({
                 theme: "primary",
                 headerTitle: title,
                 container: window.document.body,
+                position: "left-top",
                 callback: function () {
                     this.content.appendChild(container);
                 }
             });
         };
         Gui.prototype._createGui = function () {
-            var container = document.createElement("div");
-            container.classList.add('uk-scope');
-            container.classList.add("stupid-console-gui");
-            return container;
+            this.container = document.createElement("div");
+            this.container.classList.add('uk-scope');
+            this.container.classList.add("stupid-console-gui");
+            this.form = document.createElement('form');
+            this.form.classList.add("uk-form-stacked");
+            this.form.classList.add("uk-container");
+            this.form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                return false;
+            });
+            this.container.appendChild(this.form);
         };
-        Gui.prototype.add = function (target, property, min, max, step) {
+        Gui.prototype.createLabel = function (legend) {
+            var label = document.createElement("label");
+            label.className = "uk-form-label";
+            label.innerHTML = legend;
+            return label;
+        };
+        Gui.prototype.addButton = function (legend, callback) {
+            var div = document.createElement("div");
+            div.className = "uk-inline";
+            var label = this.createLabel("");
+            div.appendChild(label);
+            var button = document.createElement('a');
+            button.setAttribute("href", "");
+            button.classList.add("uk-button");
+            button.classList.add("uk-button-default");
+            //button.classList.add("uk-button-small");
+            button.innerHTML = legend;
+            button.addEventListener("click", function (e) {
+                e.preventDefault();
+                callback.apply(div, e);
+            });
+            label.appendChild(button);
+            var controls = document.createElement("div");
+            controls.className = "uk-form-controls";
+            div.appendChild(controls);
+            this.form.appendChild(div);
+            return div;
+        };
+        Gui.prototype.addInputText = function (legend, content, callback) {
+            var div = document.createElement("div");
+            div.className = "uk-margin";
+            var label = this.createLabel(legend);
+            div.appendChild(label);
+            var controls = document.createElement("div");
+            controls.className = "uk-form-controls";
+            var input = document.createElement('input');
+            input.classList.add("uk-input");
+            input.setAttribute("placeholder", content);
+            input.value = content;
+            input.addEventListener("change", function (e) {
+                e.preventDefault();
+                callback.apply(input, [input.value, e]);
+            });
+            controls.appendChild(input);
+            div.appendChild(controls);
+            this.form.appendChild(div);
+            return div;
+        };
+        Gui.prototype.addCheckbox = function (legend, checked, callback) {
+            var div = document.createElement("div");
+            div.className = "uk-margin";
+            var label = this.createLabel("");
+            div.appendChild(label);
+            var controls = document.createElement("div");
+            controls.className = "uk-form-controls";
+            var checkbox = document.createElement('input');
+            checkbox.classList.add("uk-checkbox");
+            checkbox.setAttribute("type", "checkbox");
+            if (checked === true) {
+                checkbox.checked = checked;
+            }
+            checkbox.addEventListener("change", function (e) {
+                e.preventDefault();
+                callback.apply(checkbox, [checkbox.checked, e]);
+            });
+            var _legend = document.createTextNode(legend);
+            label.appendChild(checkbox);
+            label.appendChild(_legend);
+            div.appendChild(controls);
+            this.form.appendChild(div);
+            return div;
+        };
+        Gui.prototype.addSelect = function (legend, elements, callback) {
+            var div = document.createElement("div");
+            div.className = "uk-margin";
+            var label = this.createLabel(legend);
+            div.appendChild(label);
+            var controls = document.createElement("div");
+            controls.className = "uk-form-controls";
+            var select = document.createElement('select');
+            select.className = "uk-select";
+            for (var i = 0; i < elements.length; i++) {
+                var option = document.createElement('option');
+                option.innerHTML = elements[i];
+                select.appendChild(option);
+            }
+            select.addEventListener("change", function (e) {
+                callback.apply(select, [select.selectedIndex, e]);
+            });
+            controls.appendChild(select);
+            div.appendChild(controls);
+            this.form.appendChild(div);
+            return div;
+        };
+        // TODO
+        Gui.prototype.addNumber = function (legend, callback) {
+        };
+        Gui.prototype.addRange = function (legend, min, max, callback) {
         };
         return Gui;
     }());

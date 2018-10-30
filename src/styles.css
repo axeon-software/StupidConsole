@@ -7,7 +7,7 @@
     -webkit-text-size-adjust: 100%;
     background: #fff;
     color: #666;
-    font-variant: none;
+    font-variant: normal;
 }
 
 .jsPanel-titlebar .jsPanel-title {
