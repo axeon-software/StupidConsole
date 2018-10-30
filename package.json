@@ -4,7 +4,8 @@
   "description": "",
   "main": "dist/stupid-console.js",
   "files": [
-    "dist"
+    "dist/stupid-console.css",
+    "dist/stupid-console.js"
   ],
   "scripts": {
     "build": "rollup -c && grunt"
@@ -22,5 +23,9 @@
   },
   "dependencies": {
     "jspanel4": "^4.2.1"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/axeon-software/StupidConsole"
   }
 }
