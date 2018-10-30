@@ -1,4 +1,21 @@
 
-.log, .error {
-    border-bottom: 1px solid gray;
+.jsPanel .jsPanel-content, .jsPanel-titlebar .jsPanel-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    background: #fff;
+    color: #666;
+    font-variant: none;
+}
+
+.jsPanel-titlebar .jsPanel-title {
+    background: transparent;
+    color: #fff;
+}
+
+.console-events .uk-icon {
+    padding: 10px;
+    min-width:20px;
 }

@@ -1,8 +1,13 @@
-console.log("yo", { x : "4"});
+console.info("Do you like Apple ? ");
 
-console.error({
-    x : 2,
-    hello : "world"
-});
+console.warn("I hate them");
 
-console.info("")
+console.log(2);
+
+console.log("string");
+
+console.log("2", 2, { x : 2});
+console.error("errooor");
+
+throw new Error("Error", "test.js", 5);
+

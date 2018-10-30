@@ -7,7 +7,7 @@ module.exports = function(grunt) {
                 separator: ';'
             },
             dist: {
-                src: ['./node_modules/jspanel4/dist/jspanel.js', './src/build/stupid-console.js'],
+                src: ['./node_modules/jspanel4/dist/jspanel.js', './node_modules/uikit/dist/js/uikit.js', './node_modules/uikit/dist/js/uikit-icons.js', './src/build/stupid-console.js'],
                 dest: './dist/stupid-console.js'
             }
         },
@@ -16,7 +16,7 @@ module.exports = function(grunt) {
                 // Task-specific options go here.
             },
             dist : {
-                src: ['./node_modules/jspanel4/dist/jspanel.css', './src/styles.css'],
+                src: ['./node_modules/jspanel4/dist/jspanel.css','./node_modules/uikit/dist/css/uikit.css','./src/styles.css'],
                 dest: "./dist/stupid-console.css"
             },
         },

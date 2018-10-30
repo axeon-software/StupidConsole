@@ -10,8 +10,7 @@ export default {
 
     sourceMap: true,
     external: [
-        'jsPanel',
-        'JSONFormatter'
+        'jsPanel'
     ],
     plugins: [
         typescript(/*{ plugin options }*/)

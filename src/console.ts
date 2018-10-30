@@ -1,54 +1,32 @@
+import {render} from "./render.js";
+
 export let element = document.createElement('div');
-
-function isPrimitive(test : any) {
-    return (test !== Object(test));
-}
-
-function toString(...args : any[]) {
-    let container = window.document.createElement('span');
-    for(let i = 0; i < args.length; i++) {
-        if(isPrimitive(args[i])) {
-            container.innerHTML = args[i].toString();
-        }
-        else {
-            let json  = JSON.stringify(args[i]);
-            container.innerHTML = json;
-        }
-    }
-    return container;
-}
-
-
-function domConsole(mode : string, ...args : any[]) {
-    let container = window.document.createElement('div');
-    for(let i = 0; i < args.length; i++) {
-        let div = window.document.createElement('div');
-        div.className = mode;
-        div.appendChild(toString(args[i]));
-        container.appendChild(div);
-    }
-    element.appendChild(container);
-}
 
 export let originals = {
     log : window.console.log,
     info : window.console.info,
-    error : window.console.error
+    error : window.console.error,
+    warn : window.console.warn
 };
 
 console.log = function(...args : any[]) {
-    domConsole("log", ...args);
+    render("log", ...args);
     originals.log(...args);
 };
 
 console.info = function(...args : any[]) {
-    domConsole("info", ...args);
+    render("info", ...args);
     originals.info(...args);
 };
 
 console.error = function(...args : any[]) {
-    domConsole("error", ...args);
+    render("error", ...args);
     originals.error(...args);
+};
+
+console.warn = function(...args : any[]) {
+    render("warn", ...args);
+    originals.warn(...args);
 };
 
 let currentError : any;

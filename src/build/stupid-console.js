@@ -1,52 +1,139 @@
 var StupidConsole = (function () {
     'use strict';
 
-    var element = document.createElement('div');
+    var container = document.createElement('div');
+    container.classList.add('uk-scope');
+    container.classList.add("stupid-console-output");
+    var console$1 = document.createElement('ul');
+    console$1.classList.add('uk-list');
+    console$1.classList.add('uk-list-divider');
+    var prompt = document.createElement('li');
+    var form = document.createElement('div');
+    form.className = "uk-inline .uk-width-1-1";
+    var span = document.createElement('span');
+    span.className = "uk-form-icon";
+    span.setAttribute("uk-icon", "icon: chevron-right");
+    form.appendChild(span);
+    var input = document.createElement('input');
+    input.className = "uk-input";
+    input.setAttribute("type", "search");
+    form.appendChild(input);
+    input.addEventListener("search", function (event) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        var expr = input.value;
+        var res = eval.apply(window, [expr]);
+        render("in", expr);
+        if (res) {
+            render("out", res);
+        }
+        else {
+            render("out", "undefined");
+        }
+    });
+    prompt.appendChild(form);
+    console$1.appendChild(prompt);
+    container.appendChild(console$1);
     function isPrimitive(test) {
         return (test !== Object(test));
     }
-    function toString() {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
+    function toString(value) {
+        if (isPrimitive(value)) {
+            return value.toString();
         }
-        var container = window.document.createElement('span');
-        for (var i = 0; i < args.length; i++) {
-            if (isPrimitive(args[i])) {
-                container.innerHTML = args[i].toString();
-            }
-            else {
-                var json = JSON.stringify(args[i]);
-                container.innerHTML = json;
-            }
+        else {
+            return JSON.stringify(value);
         }
-        return container;
     }
-    function domConsole(mode) {
+    function render(mode) {
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        var container = window.document.createElement('div');
-        for (var i = 0; i < args.length; i++) {
-            var div = window.document.createElement('div');
-            div.className = mode;
-            div.appendChild(toString(args[i]));
-            container.appendChild(div);
+        console$1.removeChild(prompt);
+        var li = document.createElement('li');
+        li.classList.add(mode);
+        li.classList.add("console-events");
+        var icone = document.createElement('span');
+        icone.classList.add("uk-icon");
+        var span = document.createElement('span');
+        switch (mode) {
+            case "log":
+                break;
+            case "info":
+                icone.setAttribute("uk-icon", "icon : info");
+                icone.classList.add("uk-text-primary");
+                span.className = "uk-text-primary";
+                break;
+            case "warn":
+                icone.setAttribute("uk-icon", "icon : warning");
+                icone.classList.add("uk-text-warning");
+                span.className = "uk-text-warning";
+                break;
+            case "error":
+                icone.setAttribute("uk-icon", "icon : close");
+                icone.classList.add("uk-text-danger");
+                span.className = "uk-text-danger";
+                break;
+            case "in":
+                icone.setAttribute("uk-icon", "icon : chevron-left");
+                icone.classList.add("uk-text-muted");
+                span.className = "uk-text-muted";
+                break;
+            case "out":
+                icone.setAttribute("uk-icon", "icon :  chevron-right");
+                icone.classList.add("uk-text-muted");
+                span.className = "uk-text-muted";
+                break;
+            default:
+                break;
         }
-        element.appendChild(container);
+        var innerHTML = '';
+        for (var i = 0; i < args.length; i++) {
+            if (mode == "error") {
+                if (typeof args[i] == 'string') {
+                    innerHTML += args[i];
+                }
+                else {
+                    innerHTML += args[i].msg;
+                }
+            }
+            else {
+                if (innerHTML === "") {
+                    innerHTML = toString(args[i]);
+                }
+                else {
+                    innerHTML += ', ' + toString(args[i]);
+                }
+            }
+        }
+        span.innerHTML = innerHTML;
+        li.appendChild(icone);
+        li.appendChild(span);
+        console$1.appendChild(li);
+        input.value = "";
+        console$1.appendChild(prompt);
+        input.focus();
     }
+    function clear() {
+        console$1.innerHTML = '';
+        console$1.appendChild(prompt);
+        input.focus();
+    }
+
+    var element = document.createElement('div');
     var originals = {
         log: window.console.log,
         info: window.console.info,
-        error: window.console.error
+        error: window.console.error,
+        warn: window.console.warn
     };
     console.log = function () {
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
-        domConsole.apply(void 0, ["log"].concat(args));
+        render.apply(void 0, ["log"].concat(args));
         originals.log.apply(originals, args);
     };
     console.info = function () {
@@ -54,7 +141,7 @@ var StupidConsole = (function () {
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
-        domConsole.apply(void 0, ["info"].concat(args));
+        render.apply(void 0, ["info"].concat(args));
         originals.info.apply(originals, args);
     };
     console.error = function () {
@@ -62,8 +149,16 @@ var StupidConsole = (function () {
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
-        domConsole.apply(void 0, ["error"].concat(args));
+        render.apply(void 0, ["error"].concat(args));
         originals.error.apply(originals, args);
+    };
+    console.warn = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        render.apply(void 0, ["warn"].concat(args));
+        originals.warn.apply(originals, args);
     };
     var currentError;
     window.addEventListener('error', function (event) {
@@ -82,52 +177,31 @@ var StupidConsole = (function () {
         console.error(val);
     };
 
-    var element$1 = document.createElement('div');
-    var textbox = document.createElement("input");
-    textbox.type = "text";
-    textbox.className = "prompt";
-    var button = document.createElement("button");
-    button.id = "validate";
-    button.value = "up";
-    button.addEventListener('click', function (e) {
-        e.preventDefault();
-        var res = eval.apply(window, [textbox.value]);
-        if (res) {
-            console.log(res);
-        }
-        else {
-            console.log("undefined");
-        }
-    });
-    button.innerHTML = "Enter";
-    textbox.addEventListener("keyup", function (event) {
-        // Cancel the default action, if needed
-        event.preventDefault();
-        // Number 13 is the "Enter" key on the keyboard
-        if (event.keyCode === 13) {
-            // Trigger the button element with a click
-            document.getElementById("validate").click();
-        }
-    });
-    element$1.appendChild(textbox);
-    element$1.appendChild(button);
-
     var content;
     window.onload = function () {
-        jsPanel.create({
-            headerTitle: "StupidConsole",
+        var panel = jsPanel.create({
+            theme: "primary",
+            headerTitle: "<div class=\"uk-scope\">\n " +
+                "<ul class=\"uk-iconnav\">\n" +
+                "    <li><a id='stupid-console-clear-btn' href=\"#\" uk-icon=\"icon: trash\"></a></li>\n" +
+                "</ul>" +
+                "</div>",
             container: window.document.body,
             callback: function () {
                 content = this.content;
-                content.appendChild(element);
-                content.appendChild(element$1);
+                content.appendChild(container);
             }
+        });
+        var btn = document.getElementById('stupid-console-clear-btn');
+        btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            clear();
         });
     };
     var index = {
         log: originals.log,
         info: originals.info,
-        error: originals.error
+        error: originals.error,
     };
 
     return index;

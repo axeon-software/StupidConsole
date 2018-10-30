@@ -9,7 +9,8 @@
     "dist/stupid-console.min.js"
   ],
   "scripts": {
-    "build": "rollup -c && grunt"
+    "build": "rollup -c && grunt",
+    "build:uikit" : "cd node_modules && cd uikit && yarn && yarn scope"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +24,8 @@
     "typescript": "^3.1.3"
   },
   "dependencies": {
-    "jspanel4": "^4.2.1"
+    "jspanel4": "^4.2.1",
+    "uikit": "^3.0.0-rc.20"
   },
   "repository": {
     "type": "git",
