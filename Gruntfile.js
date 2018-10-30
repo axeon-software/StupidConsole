@@ -29,12 +29,24 @@ module.exports = function(grunt) {
                     './dist/stupid-console.min.js': ['./dist/stupid-console.js']
                 }
             }
+        },
+        cssmin: {
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: 'dist/',
+                    src: ['*.css', '!*.min.css'],
+                    dest: 'dist/',
+                    ext: '.min.css'
+                }]
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-concat-css');
-    grunt.registerTask('default', ['concat_css', 'concat', 'uglify']);
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.registerTask('default', ['concat_css', 'cssmin', 'concat', 'uglify']);
 
 };

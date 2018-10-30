@@ -7,9 +7,7 @@
     <script  src="https://unpkg.com/stupidconsole/dist/stupid-console.js"></script>
 </head>
 <body>
-<script>
-    console.log("hello", "world");
-</script>
+<script src="test.js"></script>
 </body>
 </html>
 ```

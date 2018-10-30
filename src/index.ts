@@ -1,6 +1,7 @@
 import {originals} from "./console.js";
 import {container as console, clear} from "./render.js";
 import {Gui} from "./gui.js";
+
 declare let jsPanel;
 
 let content;
