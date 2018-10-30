@@ -1,6 +1,6 @@
 {
   "name": "stupidconsole",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/stupid-console.js",
   "files": [
@@ -25,7 +25,7 @@
     "jspanel4": "^4.2.1"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/axeon-software/StupidConsole"
+    "type": "git",
+    "url": "https://github.com/axeon-software/StupidConsole"
   }
 }
