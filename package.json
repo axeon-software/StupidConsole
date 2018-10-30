@@ -5,7 +5,8 @@
   "main": "dist/stupid-console.js",
   "files": [
     "dist/stupid-console.css",
-    "dist/stupid-console.js"
+    "dist/stupid-console.js",
+    "dist/stupid-console.min.js"
   ],
   "scripts": {
     "build": "rollup -c && grunt"
