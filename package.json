@@ -1,6 +1,6 @@
 {
   "name": "stupidconsole",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/stupid-console.js",
   "files": [
@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build": "rollup -c && grunt",
-    "build:uikit" : "cd node_modules && cd uikit && yarn && yarn scope"
+    "build:uikit": "cd node_modules && cd uikit && yarn && yarn scope"
   },
   "author": "",
   "license": "ISC",
