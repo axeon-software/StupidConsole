@@ -2,8 +2,7 @@
   "name": "stupidconsole",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "main": "dist/stupid-console.js",
   "files": [
     "dist"
   ],
