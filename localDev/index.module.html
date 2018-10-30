@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StupidConsole</title>
+    <link rel="stylesheet" href="../node_modules/jspanel4/dist/jspanel.css">
+    <link rel="stylesheet" href="../src/styles.css">
+    <script src="../node_modules/jspanel4/dist/jspanel.js"></script>
+    <script type="module"  src="../src/index.js"></script>
+</head>
+<body>
+<script type="module" src="test.js"></script>
+<script type="module">
+    import {default as StupidConsole} from "../src/index.js";
+    window.StupidConsole = StupidConsole;
+</script>
+</body>
+</html>
