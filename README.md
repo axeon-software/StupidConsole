@@ -2,7 +2,7 @@
 
 Because we need the console to dev but it's not easily available everywhere :
 
-1. Insert stupid-console scripts before any others in the ```<head>``` section.
+#### Insert stupid-console scripts before any others in the ```<head>``` section.
 ```html
 <head>
     <link rel="stylesheet" href="https://unpkg.com/stupidconsole/dist/stupid-console.min.css">
@@ -12,9 +12,9 @@ Because we need the console to dev but it's not easily available everywhere :
 * [Download](https://github.com/axeon-software/StupidConsole/releases) 
 * [NPM](https://www.npmjs.com/package/stupidconsole) : ```npm install stupidconsole``` 
 
-2. All console outputs will then be replicated in a floating window.
-3. There's also a console input.
-4. StupidConsole.GUI allow you to build custom debug window easily
+#### All console outputs will then be replicated in a floating window.
+#### There's also a console input.
+#### StupidConsole.GUI allow you to build custom debug window easily
 
 ```js
 var gui = new StupidConsole.Gui('myGui');
