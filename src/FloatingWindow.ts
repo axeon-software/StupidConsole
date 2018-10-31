@@ -18,7 +18,6 @@ export class FloatingWindow {
                 offsetX:      5,
                 offsetY:      5
             };
-            self.isReady = true;
             let restore = jsPanel.layout.restoreId({
                 id : config.id,
                 config : config,
@@ -28,6 +27,7 @@ export class FloatingWindow {
             if(!restore) {
                 self.container = jsPanel.create(config);
             }
+            self.isReady = true;
         });
     }
 }

@@ -19,12 +19,9 @@ console.info = function(...args : any[]) {
     originals.info(...args);
 };
 
-// TODO : error should be re thrown...
-// avoid : error in console.js line 22
-console.error = function(...args : any[]) {
+console.error = function(...args) {
     render("error", ...args);
-    //throw args[0];
-    originals.error(...args);
+    originals.error(...args, "[from stupid console : collapse to see the caller]");
 };
 
 console.warn = function(...args : any[]) {
@@ -48,5 +45,5 @@ window.addEventListener('error', function (event) {
 window["onerror"] = function (msg, url, lineno, col, error) {
     error = error ? error : currentError
     let val = { msg: msg, url: url, lineno: lineno, col: col, error: error }
-    console.error(val)
+    render("error", val);
 };

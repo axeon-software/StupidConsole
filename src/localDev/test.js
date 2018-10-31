@@ -7,7 +7,7 @@ console.log(2);
 console.log("string");
 
 console.log("2", 2, { x : 2});
-console.error("errooor");
+    console.error("errooor");
 
 var gui = new StupidConsole.Gui('myGui');
 
@@ -31,4 +31,5 @@ gui.addSelect("select one value", ["Value1", "Value2", "Value3"], function(index
     console.log("select changed " + index);
 });
 
+throw new Error("error thrown from test.js");
 
