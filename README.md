@@ -1,28 +1,27 @@
-# Quick start
-
 # Stupid Console 
-Because we need the console to dev but it's not available everywhere
-
 [Demo](https://codepen.io/levavasseur/pen/rqEvVe)
+
+Because we need the console to dev but it's not available everywhere
 
 1. Insert stupid-console scripts before any others in the ```<head>``` section.
 
-    * [ZIP](https://github.com/axeon-software/StupidConsole/releases)
-    * [NPM](https://www.npmjs.com/package/stupidconsole) ```npm install stupidconsole``` 
-    * CDN :
 ```html
     <link rel="stylesheet" href="https://unpkg.com/stupidconsole/dist/stupid-console.min.css">
     <script  src="https://unpkg.com/stupidconsole/dist/stupid-console.min.js"></script>
 ``` 
 
+* [ZIP](https://github.com/axeon-software/StupidConsole/releases)
+* [NPM](https://www.npmjs.com/package/stupidconsole) 
+```> npm install stupidconsole```
+
 
 2. All console outputs will then be replicated in a floating window.
-3.  There's also a console input.
+3. There's also a console input.
 
 ## StupidConsole.GUI 
 [Demo](https://codepen.io/levavasseur/pen/YJoLpL)
 
-Allow you to build custom debug window easily :
+Allow you to build custom debug window easily 
 
 ```js
 var gui = new StupidConsole.Gui('myGui');
