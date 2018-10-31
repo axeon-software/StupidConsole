@@ -19,8 +19,11 @@ console.info = function(...args : any[]) {
     originals.info(...args);
 };
 
+// TODO : error should be re thrown...
+// avoid : error in console.js line 22
 console.error = function(...args : any[]) {
     render("error", ...args);
+    //throw args[0];
     originals.error(...args);
 };
 

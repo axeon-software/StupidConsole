@@ -7,7 +7,7 @@ module.exports = function(grunt) {
                 separator: ';'
             },
             dist: {
-                src: ['./node_modules/jspanel4/dist/jspanel.js', './node_modules/uikit/dist/js/uikit.js', './node_modules/uikit/dist/js/uikit-icons.js', './src/build/stupid-console.js'],
+                src: ['./node_modules/jspanel4/dist/jspanel.js', './node_modules/jspanel4/dist/extensions/layout/jspanel.layout.js', './node_modules/uikit/dist/js/uikit.js', './node_modules/uikit/dist/js/uikit-icons.js', './src/build/stupid-console.js'],
                 dest: './dist/stupid-console.js'
             }
         },

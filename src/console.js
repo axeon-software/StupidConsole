@@ -22,12 +22,15 @@ console.info = function () {
     render.apply(void 0, ["info"].concat(args));
     originals.info.apply(originals, args);
 };
+// TODO : error should be re thrown...
+// avoid : error in console.js line 22
 console.error = function () {
     var args = [];
     for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
     }
     render.apply(void 0, ["error"].concat(args));
+    //throw args[0];
     originals.error.apply(originals, args);
 };
 console.warn = function () {

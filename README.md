@@ -6,8 +6,8 @@ Because we need the console to dev but it's not available everywhere
 #### Insert stupid-console scripts before any others in the ```<head>``` section.
 
 ```html
-    <link rel="stylesheet" href="https://unpkg.com/stupidconsole/dist/stupid-console.min.css">
-    <script  src="https://unpkg.com/stupidconsole/dist/stupid-console.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/stupidconsole/dist/stupid-console.min.css">
+<script  src="https://unpkg.com/stupidconsole/dist/stupid-console.min.js"></script>
 ``` 
 
 #### All console outputs will then be replicated in a floating window.

@@ -8,16 +8,17 @@
     <link rel="stylesheet" href="../styles.css">
 
     <script src="../../node_modules/jspanel4/dist/jspanel.js"></script>
+    <script src="../../node_modules/jspanel4/dist/extensions/layout/jspanel.layout.js"></script>
     <script src="../../node_modules/uikit/dist/js/uikit.js"></script>
     <script src="../../node_modules/uikit/dist/js/uikit-icons.js"></script>
+    <script type="module">
+        import {default as StupidConsole} from "../index.js";
+        window.StupidConsole = StupidConsole;
+    </script>
+
 </head>
 <body>
 
-<script type="module">
-    import {default as StupidConsole} from "../index.js";
-    window.StupidConsole = StupidConsole;
-</script>
-
-<script type="module" src="test.js"></script>
+<script  type="module" src="test.js"></script>
 </body>
 </html>

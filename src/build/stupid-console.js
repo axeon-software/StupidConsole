@@ -3,7 +3,7 @@ var StupidConsole = (function () {
 
     var container = document.createElement('div');
     container.classList.add('uk-scope');
-    container.classList.add("stupid-console-output");
+    container.classList.add("stupid-consoleContainer-output");
     var console$1 = document.createElement('ul');
     console$1.classList.add('uk-list');
     console$1.classList.add('uk-list-divider');
@@ -39,7 +39,12 @@ var StupidConsole = (function () {
     }
     function toString(value) {
         if (isPrimitive(value)) {
-            return value.toString();
+            if (value) {
+                return value.toString();
+            }
+            else {
+                return "undefined";
+            }
         }
         else {
             return JSON.stringify(value);
@@ -53,7 +58,7 @@ var StupidConsole = (function () {
         console$1.removeChild(prompt);
         var li = document.createElement('li');
         li.classList.add(mode);
-        li.classList.add("console-events");
+        li.classList.add("consoleContainer-events");
         var icone = document.createElement('span');
         icone.classList.add("uk-icon");
         var span = document.createElement('span');
@@ -113,7 +118,6 @@ var StupidConsole = (function () {
         console$1.appendChild(li);
         input.value = "";
         console$1.appendChild(prompt);
-        input.focus();
     }
 
     var element = document.createElement('div');
@@ -139,12 +143,15 @@ var StupidConsole = (function () {
         render.apply(void 0, ["info"].concat(args));
         originals.info.apply(originals, args);
     };
+    // TODO : error should be re thrown...
+    // avoid : error in console.js line 22
     console.error = function () {
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
         render.apply(void 0, ["error"].concat(args));
+        //throw args[0];
         originals.error.apply(originals, args);
     };
     console.warn = function () {
@@ -172,29 +179,129 @@ var StupidConsole = (function () {
         console.error(val);
     };
 
+    // see https://github.com/jakobmattsson/onDomReady
+    var isBound = false;
+    var readyList = [];
+    var whenReady = function () {
+        // Make sure body exists, at least, in case IE gets a little overzealous.
+        // This is taked directly from jQuery's implementation.
+        if (!document.body) {
+            return setTimeout(whenReady, 13);
+        }
+        for (var i = 0; i < readyList.length; i++) {
+            readyList[i]();
+        }
+        readyList = [];
+    };
+    var bindReady = function () {
+        // Mozilla, Opera and webkit nightlies currently support this event
+        if (document.addEventListener) {
+            var DOMContentLoaded = function () {
+                document.removeEventListener("DOMContentLoaded", DOMContentLoaded, false);
+                whenReady();
+            };
+            document.addEventListener("DOMContentLoaded", DOMContentLoaded, false);
+            window.addEventListener("load", whenReady, false); // fallback
+            // If IE event model is used
+        }
+        else if (document["attachEvent"]) {
+            var onreadystatechange = function () {
+                if (document.readyState === "complete") {
+                    document["detachEvent"]("onreadystatechange", onreadystatechange);
+                    whenReady();
+                }
+            };
+            document["attachEvent"]("onreadystatechange", onreadystatechange);
+            window["attachEvent"]("onload", whenReady); // fallback
+            // If IE and not a frame, continually check to see if the document is ready
+            var toplevel = false;
+            try {
+                toplevel = window.frameElement == null;
+            }
+            catch (e) { }
+            // The DOM ready check for Internet Explorer
+            if (document.documentElement["doScroll"] && toplevel) {
+                var doScrollCheck = function () {
+                    // stop searching if we have no functions to call
+                    // (or, in other words, if they have already been called)
+                    if (readyList.length == 0) {
+                        return;
+                    }
+                    try {
+                        // If IE is used, use the trick by Diego Perini
+                        // http://javascript.nwbox.com/IEContentLoaded/
+                        document.documentElement["doScroll"]("left");
+                    }
+                    catch (e) {
+                        setTimeout(doScrollCheck, 1);
+                        return;
+                    }
+                    // and execute any waiting functions
+                    whenReady();
+                };
+                doScrollCheck();
+            }
+        }
+    };
+    function domReady(callback) {
+        // Push the given callback onto the list of functions to execute when ready.
+        // If the dom has alredy loaded, call 'whenReady' right away.
+        // Otherwise bind the ready-event if it hasn't been done already
+        readyList.push(callback);
+        if (document.readyState === "complete") {
+            whenReady();
+        }
+        else if (!isBound) {
+            bindReady();
+            isBound = true;
+        }
+    }
+
+    var FloatingWindow = /** @class */ (function () {
+        function FloatingWindow(config) {
+            this.config = config;
+            this.isReady = false;
+            var self = this;
+            var instance = FloatingWindow.instances++;
+            domReady(function () {
+                config.container = window.document.body;
+                config.id = "floating-window-" + instance;
+                console.log("id = " + config.id);
+                config.position = {
+                    my: 'left-top',
+                    at: 'left-top',
+                    autoposition: 'right',
+                    offsetX: 5,
+                    offsetY: 5
+                };
+                self.isReady = true;
+                var restore = jsPanel.layout.restoreId({
+                    id: config.id,
+                    config: config,
+                    storagename: 'stupid-console-jsPanel'
+                });
+                if (!restore) {
+                    self.container = jsPanel.create(config);
+                }
+            });
+        }
+        FloatingWindow.instances = 0;
+        return FloatingWindow;
+    }());
+    window.addEventListener("unload", function (e) {
+        // save panel layout
+        jsPanel.layout.save({
+            selector: '.jsPanel-standard',
+            storagename: 'stupid-console-jsPanel'
+        });
+    });
+
     var Gui = /** @class */ (function () {
         function Gui(title) {
             this.title = title;
-            this._createGui();
-            this._createJsPanel();
-        }
-        Gui.prototype._createJsPanel = function () {
-            var container = this.container;
-            var title = this.title || "GUI";
-            jsPanel.create({
-                theme: "primary",
-                headerTitle: title,
-                container: window.document.body,
-                position: "left-top",
-                callback: function () {
-                    this.content.appendChild(container);
-                }
-            });
-        };
-        Gui.prototype._createGui = function () {
             this.container = document.createElement("div");
             this.container.classList.add('uk-scope');
-            this.container.classList.add("stupid-console-gui");
+            this.container.classList.add("stupid-consoleContainer-gui");
             this.form = document.createElement('form');
             this.form.classList.add("uk-form-stacked");
             this.form.classList.add("uk-container");
@@ -203,7 +310,14 @@ var StupidConsole = (function () {
                 return false;
             });
             this.container.appendChild(this.form);
-        };
+            var _title = this.title || "GUI";
+            var container = this.container;
+            var window = new FloatingWindow({
+                theme: "primary",
+                headerTitle: _title,
+                content: container
+            });
+        }
         Gui.prototype.createLabel = function (legend) {
             var label = document.createElement("label");
             label.className = "uk-form-label";
@@ -306,18 +420,11 @@ var StupidConsole = (function () {
         return Gui;
     }());
 
-    var content;
-    window.onload = function () {
-        var panel = jsPanel.create({
-            theme: "primary",
-            headerTitle: "console",
-            container: window.document.body,
-            callback: function () {
-                content = this.content;
-                content.appendChild(container);
-            }
-        });
-    };
+    new FloatingWindow({
+        theme: "primary",
+        headerTitle: "console",
+        content: container
+    });
     var index = {
         log: originals.log,
         info: originals.info,

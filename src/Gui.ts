@@ -1,31 +1,13 @@
-declare let jsPanel;
+import {FloatingWindow} from "./FloatingWindow.js";
+import {container as consoleContainer} from "./render.js";
 
 export class Gui {
     public container;
     public form;
     constructor(public title : string) {
-        this._createGui();
-        this._createJsPanel();
-    }
-
-    private _createJsPanel() {
-        let container = this.container;
-        let title = this.title || "GUI";
-        jsPanel.create({
-            theme : "primary",
-            headerTitle : title,
-            container: window.document.body,
-            position : "left-top",
-            callback : function() {
-                this.content.appendChild(container);
-            }
-        });
-    }
-
-    private _createGui() {
         this.container = document.createElement("div");
         this.container.classList.add('uk-scope');
-        this.container.classList.add("stupid-console-gui");
+        this.container.classList.add("stupid-consoleContainer-gui");
 
         this.form = document.createElement('form');
         this.form.classList.add("uk-form-stacked");
@@ -35,6 +17,15 @@ export class Gui {
             return false;
         });
         this.container.appendChild(this.form);
+
+        let _title = this.title || "GUI";
+
+        let container = this.container;
+        let window = new FloatingWindow({
+            theme : "primary",
+            headerTitle : _title,
+            content : container
+        });
     }
 
     createLabel(legend : string) {

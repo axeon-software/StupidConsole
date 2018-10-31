@@ -1,6 +1,6 @@
 export let container = document.createElement('div');
 container.classList.add('uk-scope');
-container.classList.add("stupid-console-output");
+container.classList.add("stupid-consoleContainer-output");
 
 let console = document.createElement('ul');
 console.classList.add('uk-list');
@@ -46,7 +46,13 @@ function isPrimitive(test : any) {
 
 function toString(value : any) {
     if(isPrimitive(value)) {
-        return value.toString();
+        if(value) {
+            return value.toString();
+        }
+        else {
+            return "undefined";
+        }
+
     }
     else {
         return JSON.stringify(value);
@@ -57,7 +63,7 @@ export function render(mode : string, ...args : any) {
     console.removeChild(prompt);
     let li = document.createElement('li');
     li.classList.add(mode);
-    li.classList.add("console-events")
+    li.classList.add("consoleContainer-events")
     let icone = document.createElement('span');
     icone.classList.add("uk-icon");
 
@@ -127,11 +133,9 @@ export function render(mode : string, ...args : any) {
     console.appendChild(li);
     input.value = "";
     console.appendChild(prompt);
-    input.focus();
 }
 
 export function clear() {
     console.innerHTML = '';
     console.appendChild(prompt);
-    input.focus();
 }

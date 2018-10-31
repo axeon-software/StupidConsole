@@ -1,18 +1,12 @@
 import { originals } from "./console.js";
-import { container as console } from "./render.js";
-import { Gui } from "./gui.js";
-var content;
-window.onload = function () {
-    var panel = jsPanel.create({
-        theme: "primary",
-        headerTitle: "console",
-        container: window.document.body,
-        callback: function () {
-            content = this.content;
-            content.appendChild(console);
-        }
-    });
-};
+import { container as consoleContainer } from "./render.js";
+import { Gui } from "./Gui.js";
+import { FloatingWindow } from "./FloatingWindow.js";
+new FloatingWindow({
+    theme: "primary",
+    headerTitle: "console",
+    content: consoleContainer
+});
 export default {
     log: originals.log,
     info: originals.info,
