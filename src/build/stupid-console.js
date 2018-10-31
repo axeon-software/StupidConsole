@@ -266,7 +266,6 @@ var StupidConsole = (function () {
             domReady(function () {
                 config.container = window.document.body;
                 config.id = "floating-window-" + instance;
-                console.log("id = " + config.id);
                 config.position = {
                     my: 'left-top',
                     at: 'left-top',
