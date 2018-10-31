@@ -10,13 +10,12 @@ Because we need the console to dev but it's not available everywhere
     <script  src="https://unpkg.com/stupidconsole/dist/stupid-console.min.js"></script>
 ``` 
 
+#### All console outputs will then be replicated in a floating window.
+#### There's also a console input.
+
 [Download ZIP](https://github.com/axeon-software/StupidConsole/releases)
 
 [Download with NPM](https://www.npmjs.com/package/stupidconsole) ``` npm install stupidconsole```
-
-
-#### All console outputs will then be replicated in a floating window.
-#### There's also a console input.
 
 ## StupidConsole.GUI 
 [Demo](https://codepen.io/levavasseur/pen/YJoLpL)
