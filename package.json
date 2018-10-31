@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "build": "rollup -c && grunt",
-    "build:uikit": "cd node_modules && cd uikit && yarn && yarn scope"
+    "build:uikit": "cd node_modules && cd uikit && yarn && yarn scope",
+    "release": "release-it"
   },
   "author": "",
   "license": "ISC",
