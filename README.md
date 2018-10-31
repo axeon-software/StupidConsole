@@ -3,7 +3,7 @@ Because we need the console to dev but it's not available everywhere
 # Stupid Console 
 [Demo](https://codepen.io/levavasseur/pen/rqEvVe)
 
-####1. Insert stupid-console scripts before any others in the ```<head>``` section.
+#### Insert stupid-console scripts before any others in the ```<head>``` section.
 
 ```html
     <link rel="stylesheet" href="https://unpkg.com/stupidconsole/dist/stupid-console.min.css">
@@ -15,8 +15,8 @@ Because we need the console to dev but it's not available everywhere
 [Download with NPM](https://www.npmjs.com/package/stupidconsole) ``` npm install stupidconsole```
 
 
-####2. All console outputs will then be replicated in a floating window.
-####3. There's also a console input.
+#### All console outputs will then be replicated in a floating window.
+#### There's also a console input.
 
 ## StupidConsole.GUI 
 [Demo](https://codepen.io/levavasseur/pen/YJoLpL)
