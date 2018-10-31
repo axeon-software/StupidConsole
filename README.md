@@ -1,5 +1,5 @@
 # Stupid Console
-[Download](https://github.com/axeon-software/StupidConsole/releases) | [NPM](https://www.npmjs.com/package/stupidconsole) : ```npm install stupidconsole``` 
+[Download](https://github.com/axeon-software/StupidConsole/releases) | [NPM](https://www.npmjs.com/package/stupidconsole) ```npm install stupidconsole``` 
 
 Because we need the console to dev but it's not easily available everywhere :
 
@@ -12,7 +12,10 @@ Because we need the console to dev but it's not easily available everywhere :
 
 #### All console outputs will then be replicated in a floating window.
 #### There's also a console input.
-#### StupidConsole.GUI allow you to build custom debug window easily
+
+## StupidConsole.GUI 
+
+Allow you to build custom debug window easily :
 
 ```js
 var gui = new StupidConsole.Gui('myGui');
