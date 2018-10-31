@@ -1,7 +1,7 @@
 # Stupid Console
 [Download](https://github.com/axeon-software/StupidConsole/releases) | [NPM](https://www.npmjs.com/package/stupidconsole) ```npm install stupidconsole``` 
 
-Because we need the console to dev but it's not easily available everywhere :
+Because we need the console to dev but it's not available everywhere :
 
 #### Insert stupid-console scripts before any others in the ```<head>``` section.
 ```html
