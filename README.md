@@ -1,11 +1,14 @@
-Demo [StupidConsole](https://codepen.io/levavasseur/pen/rqEvVe) | [StupidConsole.GUI](https://codepen.io/levavasseur/pen/YJoLpL)
+### Demo 
+[StupidConsole](https://codepen.io/levavasseur/pen/rqEvVe) | [StupidConsole.GUI](https://codepen.io/levavasseur/pen/YJoLpL)
 
-CDN 
+### CDN 
 ```html
     <link rel="stylesheet" href="https://unpkg.com/stupidconsole/dist/stupid-console.min.css">
     <script  src="https://unpkg.com/stupidconsole/dist/stupid-console.min.js"></script>
 ``` 
-Download [ZIP](https://github.com/axeon-software/StupidConsole/releases) | [NPM](https://www.npmjs.com/package/stupidconsole) ```npm install stupidconsole``` 
+### Download 
+[ZIP](https://github.com/axeon-software/StupidConsole/releases) | [NPM](https://www.npmjs.com/package/stupidconsole) ```npm install stupidconsole``` 
+
 # Stupid Console 
 
 Because we need the console to dev but it's not available everywhere :
