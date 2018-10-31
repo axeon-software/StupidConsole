@@ -1,17 +1,19 @@
 # Stupid Console
 
-1. Insert stupid-console before any other scripts in the ```<head>``` section.
+1. Insert stupid-console scripts before any others in the ```<head>``` section.
 ```html
 <head>
     <link rel="stylesheet" href="https://unpkg.com/stupidconsole/dist/stupid-console.min.css">
     <script  src="https://unpkg.com/stupidconsole/dist/stupid-console.min.js"></script>
 ``` 
 
-* Download
-* NPM
+* [Download](https://github.com/axeon-software/StupidConsole/releases) 
+* [NPM](https://www.npmjs.com/package/stupidconsole)
+``` 
+npm i stupidconsole
+``` 
 
-
-2. All console outputs will be replicated in a floating window
+2. All console outputs will then be replicated in a floating window
 
 screenshot.png
 
