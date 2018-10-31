@@ -1,6 +1,6 @@
 # Stupid Console
 
-1. Insert stupid-console before any other scripts in the <head> section.
+1. Insert stupid-console before any other scripts in the ```<head>``` section.
 ```html
 <head>
     <link rel="stylesheet" href="https://unpkg.com/stupidconsole/dist/stupid-console.min.css">
