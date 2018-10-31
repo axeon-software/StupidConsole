@@ -1,7 +1,7 @@
+Because we need the console to dev but it's not available everywhere
+
 # Stupid Console 
 [Demo](https://codepen.io/levavasseur/pen/rqEvVe)
-
-Because we need the console to dev but it's not available everywhere
 
 1. Insert stupid-console scripts before any others in the ```<head>``` section.
 
@@ -10,9 +10,9 @@ Because we need the console to dev but it's not available everywhere
     <script  src="https://unpkg.com/stupidconsole/dist/stupid-console.min.js"></script>
 ``` 
 
-* [ZIP](https://github.com/axeon-software/StupidConsole/releases)
-* [NPM](https://www.npmjs.com/package/stupidconsole) 
-```> npm install stupidconsole```
+[ZIP](https://github.com/axeon-software/StupidConsole/releases)
+
+[NPM](https://www.npmjs.com/package/stupidconsole) ``` npm install stupidconsole```
 
 
 2. All console outputs will then be replicated in a floating window.
