@@ -6,7 +6,8 @@ import {FloatingWindow} from "./FloatingWindow.js";
 new FloatingWindow({
     theme : "primary",
     headerTitle : "console",
-    content : consoleContainer
+    content : consoleContainer,
+    paneltype: 'stupidconsole'
 });
 
 export default {

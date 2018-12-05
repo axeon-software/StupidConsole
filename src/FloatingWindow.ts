@@ -36,7 +36,7 @@ export class FloatingWindow {
 window.addEventListener("unload", function(e) {
     // save panel layout
     jsPanel.layout.save({
-        selector:    '.jsPanel-standard',
+        selector:    '.jsPanel-stupidconsole',
         storagename: 'stupid-console-jsPanel'
     });
 });

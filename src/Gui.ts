@@ -24,7 +24,8 @@ export class Gui {
         let window = new FloatingWindow({
             theme : "primary",
             headerTitle : _title,
-            content : container
+            content : container,
+            paneltype: 'stupidconsole'
         });
     }
 
